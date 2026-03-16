@@ -36,7 +36,7 @@ echo %FORMAT%
 echo %FFMPEG_PATH%
 
 ::Run command
-:yt-dlp %YT_URL% -P %FILE_PATH% -o %FILE_NAME% -f %FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+yt-dlp %YT_URL% -P %FILE_PATH% -o %FILE_NAME% -f %FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
 
 :end
 if defined ERRMSG echo %ERRMSG%
