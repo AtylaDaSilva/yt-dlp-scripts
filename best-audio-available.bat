@@ -1,6 +1,11 @@
 ::Disable echo
 @echo off
 
+::Splash
+echo ========== yt-dlp Scripts ==========
+echo ------- Best Audio Available -------
+echo ====================================
+
 ::Variables
 set "YT_URL=%~1"
 
