@@ -33,15 +33,19 @@ if %YT_URL%==%YT_URL_UNQUOTED% (
 set FILE_FORMAT=ba
 
 ::Echo params
-echo %YT_URL%
+echo ------------ Parameters ------------
+
+echo URL: %YT_URL%
 @REM echo %YT_URL_UNQUOTED% DEBUG
-echo %FILE_PATH%
-echo %FILE_NAME%
-echo %FILE_FORMAT%
-echo %FFMPEG_PATH%
+echo FILE_PATH: %FILE_PATH%
+echo FILE_NAME: %FILE_NAME%
+echo FILE_FORMAT: %FILE_FORMAT%
+echo FFMPEG_PATH: %FFMPEG_PATH%
 
 ::Run command
+echo ------------ yt-dlp output start -----------
 yt-dlp %YT_URL% -P %FILE_PATH% -o %FILE_NAME% -f %FILE_FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+echo ------------  yt-dlp output end  -----------
 
 :end
 if defined ERRMSG echo %ERRMSG%
