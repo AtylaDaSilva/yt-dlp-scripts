@@ -10,7 +10,7 @@ echo ====================================
 set "YT_URL=%~1"
 
 if not defined YT_URL (
-    echo "Missing URL"
+    echo Missing URL parameter
     exit \b
 )
 
