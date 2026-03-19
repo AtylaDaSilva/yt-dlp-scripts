@@ -44,7 +44,7 @@ echo FFMPEG_PATH: %FFMPEG_PATH%
 
 ::Run command
 echo ------------ yt-dlp output start -----------
-yt-dlp %YT_URL% -P %FILE_PATH% -o %FILE_NAME% -f %FILE_FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+%YTDLP_PATH% %YT_URL% -P %FILE_PATH% -o %FILE_NAME% -f %FILE_FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
 echo ------------  yt-dlp output end  -----------
 
 :end
