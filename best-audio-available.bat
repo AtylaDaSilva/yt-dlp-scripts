@@ -1,3 +1,6 @@
+::Author: AtylaDaSilva (atyladasilva@outlook.com)
+::Description: Downloads with the best available audio-only format
+
 ::Disable echo
 @echo off
 
