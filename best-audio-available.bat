@@ -1,5 +1,5 @@
 ::Author: AtylaDaSilva (atyladasilva@outlook.com)
-::Description: Downloads with the best available audio-only format
+::Description: Downloads with the best available quality format that contains both audio and video.
 
 ::Disable echo
 @echo off
@@ -9,7 +9,7 @@ echo ========== yt-dlp Scripts ==========
 echo ------- Best Audio Available -------
 echo ====================================
 
-::Read .ini file
+::Read .ini file and set variables
 for /f "tokens=1,2 delims=^=" %%A in (yt-dlp-scripts.ini) do (
     set "%%A=%%~B"
 )
@@ -45,9 +45,12 @@ echo FILE_NAME: %FILE_NAME%
 echo FILE_FORMAT: %FILE_FORMAT%
 echo FFMPEG_PATH: %FFMPEG_PATH%
 
+set COMMAND=%YTDLP_PATH% %YT_URL% --cookies-from-browser %COOKIES_FROM_BROWSER% -P %FILE_PATH% -o %FILE_NAME% -f %FILE_FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+echo %COMMAND%
+
 ::Run command
 echo ------------ yt-dlp output start -----------
-%YTDLP_PATH% %YT_URL% -P %FILE_PATH% -o %FILE_NAME% -f %FILE_FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+%COMMAND%
 echo ------------  yt-dlp output end  -----------
 
 :end

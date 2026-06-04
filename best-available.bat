@@ -9,7 +9,7 @@ echo ========== yt-dlp Scripts ==========
 echo ------- Best Audio Available -------
 echo ====================================
 
-::Read .ini file
+::Read .ini file and set variables
 for /f "tokens=1,2 delims=^=" %%A in (yt-dlp-scripts.ini) do (
     set "%%A=%%~B"
 )
@@ -40,9 +40,12 @@ echo FILE_PATH: %FILE_PATH%
 echo FILE_NAME: %FILE_NAME%
 echo FFMPEG_PATH: %FFMPEG_PATH%
 
+set COMMAND=%YTDLP_PATH% %YT_URL% --cookies-from-browser %COOKIES_FROM_BROWSER% -P %FILE_PATH% -o %FILE_NAME% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+echo %COMMAND%
+
 ::Run command
-echo ------------ yt-dlp output start -----------
-%YTDLP_PATH% %YT_URL% -P %FILE_PATH% -o %FILE_NAME% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+echo ------------ yt-dlp output start ----------
+%COMMAND%
 echo ------------  yt-dlp output end  -----------
 
 :end
