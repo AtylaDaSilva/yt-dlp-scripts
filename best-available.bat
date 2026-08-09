@@ -39,13 +39,20 @@ if %YT_URL%==%YT_URL_UNQUOTED% (
 ::Echo params
 echo ------------ Parameters ------------
 
-if "%~2"=="--no-merge" (
-    @REM Download best format that contains both audio and video, without merging.
-    set FORMAT="best"
+@REM Download best format that contains video,
+@REM and if it doesn't already have an audio stream, merge it with best audio-only format.
+set FORMAT="bv*+ba/b"
+
+if "%~2"=="--output" (
+    if "%~3"=="mkv" (
+        @REM Remuxes the downloaded video in the desired extension. Falls back to webm if the remuxing fails.
+        set OUTPUT=--remux-video "%~3/webm"
+    ) else (
+        @REM Remuxes the downloaded video in the desired extension. Falls back to mkv if the remuxing fails.
+        set OUTPUT=--remux-video "%~3/mkv"
+    )
 ) else (
-    @REM Download best format that contains video,
-    @REM and if it doesn't already have an audio stream, merge it with best audio-only format.
-    set FORMAT="bv*+ba/b"
+    set OUTPUT=
 )
 
 echo URL: %YT_URL%
@@ -54,7 +61,7 @@ echo FILE_PATH: %FILE_PATH%
 echo FILE_NAME: %FILE_NAME%
 echo FFMPEG_PATH: %FFMPEG_PATH%
 
-set COMMAND=%YTDLP_PATH% %YT_URL% --cookies-from-browser %COOKIES_FROM_BROWSER% -P %FILE_PATH% -o %FILE_NAME% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+set COMMAND=%YTDLP_PATH% %YT_URL% -f %FORMAT% %OUTPUT% --cookies-from-browser %COOKIES_FROM_BROWSER% -P %FILE_PATH% -o %FILE_NAME% --no-playlist --ffmpeg-location %FFMPEG_PATH%
 echo %COMMAND%
 
 ::Run command
