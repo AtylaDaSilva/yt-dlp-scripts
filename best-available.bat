@@ -3,7 +3,7 @@
 
 ::Params:
 ::  %1: YouTube URL
-::  %2: Optional flag to disable merging (use --no-merge)
+::  --output: Optional flag to remux the downloaded video in the desired extension. If the remuxing fails, it will fall back to mkv (or webm if mkv is specified).
 
 ::Disable echo
 @echo off
