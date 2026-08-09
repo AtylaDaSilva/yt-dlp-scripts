@@ -10,7 +10,7 @@
 
 ::Splash
 echo ========== yt-dlp Scripts ==========
-echo ------- Best Audio Available -------
+echo ------- Best Available -------
 echo ====================================
 
 ::Read .ini file and set variables
