@@ -1,6 +1,10 @@
 ::Author: AtylaDaSilva (atyladasilva@outlook.com)
 ::Description: Downloads with the best available quality format that contains both audio and video.
 
+::Params:
+::  %1: YouTube URL
+::  %2: Optional flag to disable merging (use --no-merge)
+
 ::Disable echo
 @echo off
 
@@ -35,7 +39,17 @@ if %YT_URL%==%YT_URL_UNQUOTED% (
 ::Echo params
 echo ------------ Parameters ------------
 
+if "%~2"=="--no-merge" (
+    @REM Download best format that contains both audio and video, without merging.
+    set FORMAT="best"
+) else (
+    @REM Download best format that contains video,
+    @REM and if it doesn't already have an audio stream, merge it with best audio-only format.
+    set FORMAT="bv*+ba/b"
+)
+
 echo URL: %YT_URL%
+echo FORMAT: %FORMAT%
 echo FILE_PATH: %FILE_PATH%
 echo FILE_NAME: %FILE_NAME%
 echo FFMPEG_PATH: %FFMPEG_PATH%
