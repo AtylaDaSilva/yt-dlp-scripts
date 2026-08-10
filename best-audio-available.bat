@@ -1,6 +1,10 @@
 ::Author: AtylaDaSilva (atyladasilva@outlook.com)
 ::Description: Downloads with the best available quality format that contains both audio and video.
 
+::Params:
+::  %1: YouTube URL
+::  --output: Optional flag to convert audio from the downloaded audio in the desired extension. If the convertion fails, it will fall back to mp3 (or wav if mp3 is specified).
+
 ::Disable echo
 @echo off
 
@@ -38,14 +42,25 @@ set FILE_FORMAT=ba
 ::Echo params
 echo ------------ Parameters ------------
 
+if "%~2"=="--output" (
+    if "%~3"=="mp3" (
+        @REM Converts the downloaded audio to the desired extension. Falls back to webm if the remuxing fails.
+        set OUTPUT=--extract-audio --audio-format "%~3/wav"
+    ) else (
+        @REM Converts the downloaded audio to the desired extension. Falls back to mkv if the remuxing fails.
+        set OUTPUT=--extract-audio --audio-format "%~3/mp3"
+    )
+) else (
+    set OUTPUT=
+)
+
 echo URL: %YT_URL%
-@REM echo %YT_URL_UNQUOTED% DEBUG
 echo FILE_PATH: %FILE_PATH%
 echo FILE_NAME: %FILE_NAME%
 echo FILE_FORMAT: %FILE_FORMAT%
 echo FFMPEG_PATH: %FFMPEG_PATH%
 
-set COMMAND=%YTDLP_PATH% %YT_URL% --cookies-from-browser %COOKIES_FROM_BROWSER% -P %FILE_PATH% -o %FILE_NAME% -f %FILE_FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
+set COMMAND=%YTDLP_PATH% %YT_URL% %OUTPUT% --cookies-from-browser %COOKIES_FROM_BROWSER% -P %FILE_PATH% -o %FILE_NAME% -f %FILE_FORMAT% --no-playlist --ffmpeg-location %FFMPEG_PATH%
 echo %COMMAND%
 
 ::Run command
